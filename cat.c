@@ -19,8 +19,7 @@ int main(int argc, char *argv[])
 
     char c;
 
-    // Read 'file' one character at a time with fgetc() and print that character until EOF is
-    // reached
+    // Read 'file' one character at a time with fgetc() and print that character until EOF
     while ((c = fgetc(file)) != EOF)
     {
         printf("%c", c);
