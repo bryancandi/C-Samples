@@ -10,16 +10,17 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-FILE *file = fopen(argv[1], "r"); // open file in read mode
-if (file == NULL)
-{
-    printf("%s: Cannot access file '%s'\n", argv[0], argv[1]);
-    return 2;
-}
+    FILE *file = fopen(argv[1], "r"); // open file in read mode
+    if (file == NULL)
+    {
+        printf("%s: Cannot access file '%s'\n", argv[0], argv[1]);
+        return 2;
+    }
 
     char c;
 
-    // Read 'file' one character at a time with fgetc() and print that character until EOF is reached
+    // Read 'file' one character at a time with fgetc() and print that character until EOF is
+    // reached
     while ((c = fgetc(file)) != EOF)
     {
         printf("%c", c);
