@@ -21,6 +21,8 @@ int main(void)
     while (n <= 0);
 
     printf("Factorial of %i is: %i\n", n, fact(n));
+
+    return 0;
 }
 
 int fact(int n)
@@ -35,6 +37,4 @@ int fact(int n)
     {
         return n * fact(n - 1);
     }
-
-    return 0;
 }
