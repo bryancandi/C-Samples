@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
     fread(buffer, sizeof(uint8_t), 4, file);
 
     // Check the first 4 byes of the file
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
         if (buffer[i] != signature[i])
         {
