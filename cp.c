@@ -40,4 +40,6 @@ int main(int argc, char *argv[])
 
     fclose(dst);
     fclose(src);
+
+    return 0;
 }
