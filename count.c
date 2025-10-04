@@ -6,6 +6,7 @@
 int main(void)
 {
     printf("Type one or more sentences followed by Enter, then press CTRL+D to count:\n");
+    
     int c, nl, nw, nc, state;
 
     state = OUT;
@@ -27,5 +28,6 @@ int main(void)
             ++nw;
         }
     }
+    
     printf("Lines: %d\nWords: %d\nChars: %d\n", nl, nw, nc);
 }
