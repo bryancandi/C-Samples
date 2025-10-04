@@ -28,6 +28,6 @@ int main(void)
             ++nw;
         }
     }
-    
+
     printf("Lines: %d\nWords: %d\nChars: %d\n", nl, nw, nc);
 }
