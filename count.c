@@ -5,7 +5,8 @@
 
 int main(void)
 {
-    printf("Type one or more sentences followed by Enter, then press CTRL+D to count:\n");
+    printf("Type one or more sentences followed by Enter.\n");
+    printf("To end input, press Ctrl+D (Linux) or Ctrl+Z (Windows) followed by Enter.\n\n");
     
     int c, nl, nw, nc, state;
 
