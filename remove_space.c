@@ -16,12 +16,14 @@ int main(void)
     }
     else
     {
-        // remove trailing newline from fgets()
+        // remove trailing newline provided by fgets()
+        // use strcspn to find the position of '\n' char and replace it with a null terminator
         s[strcspn(s, "\n")] = 0;
     }
 
-    char *t = malloc(strlen(s) + 1); 
-    if (t == NULL) {
+    char *t = malloc(strlen(s) + 1);
+    if (t == NULL)
+    {
         perror("malloc failed");
         exit(1);
     }
