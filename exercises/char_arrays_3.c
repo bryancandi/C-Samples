@@ -3,7 +3,7 @@
 #include <stdio.h>
 #define MAXLINE 1000
 
-int _getline(char[], int maxline);
+int my_getline(char[], int maxline);
 
 // print all lines that are longer than 80 chars
 int main(void)
@@ -13,7 +13,7 @@ int main(void)
     char line[MAXLINE];     // current input line
 
     max = 0;
-    while ((len = _getline(line, MAXLINE)) > 0)
+    while ((len = my_getline(line, MAXLINE)) > 0)
     {
         if (len > max)
         {
@@ -28,8 +28,8 @@ int main(void)
     return 0;
 }
 
-// getline: read a line into s, return length
-int _getline(char s[], int lim)
+// my_getline: read a line into s, return length
+int my_getline(char s[], int lim)
 {
     int c, i;
 
