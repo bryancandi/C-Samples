@@ -1,3 +1,5 @@
+/* Chapter 1.9 sample */
+
 #include <stdio.h>
 #define MAXLINE 1000
 
