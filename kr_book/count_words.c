@@ -1,13 +1,12 @@
+/* Sample 1.5.4 count words */
+
 #include <stdio.h>
 
 #define IN 1  // inside a word
 #define OUT 0 // outside a word
 
 int main(void)
-{
-    printf("Type one or more sentences followed by Enter.\n");
-    printf("To end input, press Ctrl+D (Linux) or Ctrl+Z (Windows) followed by Enter.\n\n");
-    
+{   
     int c, nl, nw, nc, state;
 
     state = OUT;

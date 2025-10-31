@@ -1,3 +1,4 @@
+/* Exercise 1-12 */
 #include <stdio.h>
 
 // print words entered one per line

@@ -1,3 +1,5 @@
+/* Exercise 1-13 */
+
 #include <stdio.h>
 
 // print histogram the length of the words entered

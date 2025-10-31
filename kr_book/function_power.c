@@ -1,3 +1,5 @@
+/* Sample 1.7 power function */
+
 #include <stdio.h>
 
 int power(int m, int n);

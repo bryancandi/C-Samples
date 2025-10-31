@@ -1,4 +1,4 @@
-/* Chapter 1.9 sample */
+/* Sample 1.9 character arrays */
 
 #include <stdio.h>
 #define MAXLINE 1000
