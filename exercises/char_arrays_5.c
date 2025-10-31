@@ -6,7 +6,7 @@
 int my_getline(char[], int maxline);
 void reverse(char s[]);
 
-// print all lines that are longer than 80 chars
+// reverse the order of the string and then print
 int main(void)
 {
     int len;    // current line length

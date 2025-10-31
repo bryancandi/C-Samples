@@ -5,7 +5,7 @@
 
 int my_getline(char[], int maxline);
 
-// print all lines that are longer than 80 chars
+// remove trailing whitespace and tabs from the string and then print
 int main(void)
 {
     int len;    // current line length
