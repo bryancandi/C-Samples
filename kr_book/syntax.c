@@ -2,8 +2,9 @@
 
 /*
  * TO-DO: 
- * call function to copy opened file to a new temporary file for checking
- * use comment removal function in separate file to remove comments from the temp C source file
+ * call function to copy source file to a new temporary file for checking
+ * call comment removal function to remove comments from the temporary C source file
+ * check temporary file for balance issues
  * delete temporary file
  */
 
