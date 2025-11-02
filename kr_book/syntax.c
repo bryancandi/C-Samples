@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     // reposition file pointer to start of file for reading (it is currently at EOF after writing)
     rewind(tmp_file);
 
-    check_balance(tmp_file);
+    delim_check(tmp_file);
     
     fclose(src_file);
     fclose(tmp_file);
