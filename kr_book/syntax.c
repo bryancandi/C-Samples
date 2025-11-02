@@ -1,8 +1,8 @@
 /* Exercise 1-24 */
 
 /*
- * TO-DO: 
- * Check for single ' around parentheses: '(' ..and ignore if present
+ * TO-DO:
+ * work on check functions
  */
 
 #include <stdint.h>
@@ -10,7 +10,7 @@
 
 typedef uint8_t BYTE;
 
-void check_balance(FILE *file);
+void delim_check(FILE *file);
 void remove_comments(FILE *src_file, FILE *tmp_file);
 
 int main(int argc, char *argv[])
@@ -109,7 +109,7 @@ void remove_comments(FILE *src_file, FILE *tmp_file)
     }
 }
 
-void check_balance(FILE *file)
+void delim_check(FILE *file)
 {
     char c;
     int parens = 0;
@@ -151,6 +151,7 @@ void check_balance(FILE *file)
     {
         printf("Unbalanced: missing ')' before end of file (opened at or before line %i).\n", line_counter);
     }
-    // TO-DO: add other balance checks [] {} etc.
-    // Keep track of what line any parentheses are missing
+    // TO-DO: add other delimiter balance checks [] {} etc.
+    // Check for chars in printf statements etc and ignore
+    // Keep track of lines
 }
