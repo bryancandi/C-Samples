@@ -36,7 +36,11 @@ int main(int argc, char *argv[])
                 // inside block comment
                 while ((c = fgetc(src)) != EOF)
                 {
-                    if (c == '*')
+                    if (c == '\n')
+                    {
+                        fputc('\n', dst); // preserve line structure
+                    }
+                    else if (c == '*')
                     {
                         nnext = fgetc(src);
                         if (nnext == '/')
