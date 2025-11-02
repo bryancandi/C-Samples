@@ -1,5 +1,12 @@
 /* Exercise 1-24 */
 
+/*
+ * TO-DO: 
+ * call function to copy opened file to a new temporary file for checking
+ * use comment removal function in separate file to remove comments from the temp C source file
+ * delete temporary file
+ */
+
 #include <stdio.h>
 
 void check_balance(FILE *file);
