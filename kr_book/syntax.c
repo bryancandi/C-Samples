@@ -70,7 +70,7 @@ void remove_comments(FILE *src_file, FILE *tmp_file)
                     {
                         fputc('\n', tmp_file); // preserve line structure
                     }
-                    if (c == '*')
+                    else if (c == '*')
                     {
                         nnext = fgetc(src_file);
                         if (nnext == '/')
@@ -141,7 +141,7 @@ void check_balance(FILE *file)
 
     if (parens == 0 && error_line == -1)
     {
-        printf("Parentheses () are balanced.\n");
+        printf("Parentheses '()' are balanced.\n");
     }
     else if (error_line != -1)
     {
