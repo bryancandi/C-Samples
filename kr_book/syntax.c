@@ -8,6 +8,8 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#define MAX_ERRORS 1000
+
 typedef uint8_t BYTE;
 
 void delim_check(FILE *file);
@@ -21,14 +23,14 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    FILE *src_file = fopen(argv[1], "rb");
+    FILE *src_file = fopen(argv[1], "r");
     if (!src_file)
     {
         printf("Source file '%s' does not exist\n", argv[1]);
         return 2;
     }
 
-    FILE *tmp_file = fopen("tmp_file.c", "wb+");
+    FILE *tmp_file = fopen("tmp_file.c", "w+");
     if (!tmp_file)
     {
         printf("Cannot create temporary file\n");
@@ -112,24 +114,44 @@ void remove_comments(FILE *src_file, FILE *tmp_file)
 void delim_check(FILE *file)
 {
     char c;
-    int parens = 0;
     int line_counter = 1;
-    int error_line = -1;
+    int open_parens[MAX_ERRORS];
+    int open_count = 0;
+    int extra_parens[MAX_ERRORS];
+    int extra_count = 0;
 
     // read the file one char at a time and check for balance
     while ((c = fgetc(file)) != EOF)
     {
         if (c == '(')
         {
-            parens++;
+            if (open_count < MAX_ERRORS)
+            {
+                // add entry for opening paren at position 'open++'
+                open_parens[open_count++] = line_counter;
+            }
+            else
+            {
+                fprintf(stderr, "Overflow: too many open parentheses (line %d)\n", line_counter);
+            }
         }
         else if (c == ')')
         {
-            parens--;
-            if (parens < 0 && error_line == -1)
+            if (open_count > 0)
             {
-                // Found more ')' than '('
-                error_line = line_counter;
+                // matched one opening paren; pop it
+                --open_count;
+            }
+            else
+            {
+                if (extra_count < MAX_ERRORS)
+                {
+                    extra_parens[extra_count++] = line_counter;
+                }
+                else
+                {
+                    fprintf(stderr, "Overflow: too many unmatched parentheses (line %d)\n", line_counter);
+                }
             }
         }
 
@@ -139,19 +161,41 @@ void delim_check(FILE *file)
         }
     }
 
-    if (parens == 0 && error_line == -1)
+    if (open_count == 0 && extra_count == 0)
     {
         printf("Parentheses '()' are balanced.\n");
+        return;
     }
-    else if (error_line != -1)
+
+    if (extra_count > 0)
     {
-        printf("Unbalanced: extra ')' detected at line %i.\n", error_line);
+        printf("Unmatched closing ')' found at line%s: ", extra_count > 1 ? "s" : "");
+        for (int i = 0; i < extra_count; ++i)
+        {
+            if (i != 0)
+            {
+                printf(", ");
+            }
+            printf("%i", extra_parens[i]);
+        }
+        printf(".\n");
     }
-    else
+
+    if (open_count > 0)
     {
-        printf("Unbalanced: missing ')' before end of file (opened at or before line %i).\n", line_counter);
+        printf("Unclosed '(' opened at line%s: ", open_count > 1 ? "s" : "");
+        for (int i = 0; i < open_count; ++i)
+        {
+            if (i != 0)
+            {
+                printf(", ");
+            }
+            printf("%i", open_parens[i]);
+        }
+        printf(".\n");
     }
     // TO-DO: add other delimiter balance checks [] {} etc.
-    // Check for chars in printf statements etc and ignore
-    // Keep track of lines
+    // Check for chars between "" or '' and ignore
+    // Change delim_function to int, return values to main
+    // Move printf statements out of delim_function to main; print based on return value
 }
