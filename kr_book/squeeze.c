@@ -16,8 +16,8 @@ int main(void)
     n = any(string1, string2);
     squeeze(string1, string2);
 
-    printf("%d\n", n);
-    printf("%s\n", string1);
+    printf("First char matched at location: %d\n", n);
+    printf("String 1 squeezed: %s\n", string1);
 
 }
 
@@ -33,7 +33,7 @@ int any(char s1[], char s2[])
 
         if (s1[i] == s2[k])
         {
-            return i;
+            return i + 1; // +1 since the loops are zero indexed
             break;
         }
     }
