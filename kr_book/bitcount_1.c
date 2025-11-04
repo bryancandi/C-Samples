@@ -13,6 +13,8 @@ int main(void)
     int result = bitcount(x);
 
     printf("%d\n", result); // returns 4 as 10110010 has 4 bits
+
+    return 0;
 }
 
 // count '1' bits in x

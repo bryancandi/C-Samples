@@ -15,6 +15,8 @@ int main(void)
     unsigned result = rightrot(x, n);
 
     printf("%u\n", result); // prints 86 (binary 01010110)
+
+    return 0;
 }
 
 unsigned rightrot(unsigned x, int n) {

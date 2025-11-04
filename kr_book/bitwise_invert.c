@@ -17,6 +17,8 @@ int main(void)
     unsigned result = invert(x, p, n);
 
     printf("%u\n", result); // prints 176 (binary 10110000)
+
+    return 0;
 }
 
 unsigned invert(unsigned x, int p, int n)

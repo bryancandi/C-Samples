@@ -25,6 +25,8 @@ int main(void)
     unsigned result = setbits(x, p, n, y);
 
     printf("%u\n", result); // prints 188 (binary 10111100)
+
+    return 0;
 }
 
 unsigned setbits(unsigned x, int p, int n, unsigned y)
