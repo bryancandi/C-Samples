@@ -1,4 +1,6 @@
-/* Section 2.10 expample - bitcount */
+/* Section 2.10 example
+ * bitcount - count 1 bits in x
+ */
 
 #include <stdio.h>
 
