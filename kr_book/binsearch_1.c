@@ -10,10 +10,9 @@ int binsearch(int x, int v[], int n);
 int main(void)
 {
     int x = 18; // searching for this
-    int n = SIZE;
-    int num_array[10] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+    int num_array[SIZE] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
 
-    if (binsearch(x, num_array, n) == NOT_FOUND)
+    if (binsearch(x, num_array, SIZE) == NOT_FOUND)
     {
         printf("%d not found.\n", x);
     }
