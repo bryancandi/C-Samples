@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 
-#define SIZE 10
 #define NOT_FOUND -1
 
 int binsearch(int x, int v[], int n);
@@ -11,8 +10,9 @@ int main(void)
 {
     int x = 18; // searching for this
     int num_array[] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+    int size = sizeof(num_array) / sizeof(num_array[0]);
 
-    if (binsearch(x, num_array, SIZE) == NOT_FOUND)
+    if (binsearch(x, num_array, size) == NOT_FOUND)
     {
         printf("%d not found.\n", x);
     }

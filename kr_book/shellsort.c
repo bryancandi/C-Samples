@@ -4,26 +4,24 @@
 
 #include <stdio.h>
 
-#define SIZE 6
-
 void shellsort(int v[], int n);
 
 int main(void)
 {
     int num_array[] = {37, 12, 89, 24, 45, 9};
-    int size = SIZE;
+    int size = sizeof(num_array) / sizeof(num_array[0]);
 
     printf("Before sort:\n");
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < size; i++)
     {
         printf("%d ", num_array[i]);
     }
     printf("\n\n");
 
-    shellsort(num_array, SIZE);
+    shellsort(num_array, size);
 
     printf("After sort:\n");
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < size; i++)
     {
         printf("%d ", num_array[i]);
     }
