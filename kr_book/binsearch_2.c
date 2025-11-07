@@ -10,7 +10,7 @@ int binsearch(int x, int v[], int n);
 int main(void)
 {
     int x = 18; // searching for this
-    int num_array[SIZE] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+    int num_array[] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
 
     if (binsearch(x, num_array, SIZE) == NOT_FOUND)
     {
@@ -20,6 +20,8 @@ int main(void)
     {
         printf("%d found.\n", x);
     }
+
+    return 0;
 }
 
 // binsearch: find x in v[0] <= v[1] <= ... <=v[n - 1] (array must be sorted)
