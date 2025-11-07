@@ -17,6 +17,7 @@ int main(void)
         putchar(lc);
     }
 
+    return 0;
 }
 
 // use conditional expression to:

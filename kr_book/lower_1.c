@@ -17,6 +17,7 @@ int main(void)
         putchar(lc);
     }
 
+    return 0;
 }
 
 // converts an uppercase ASCII letter 'c' to lowercase using the formula c + 'a' - 'A'
