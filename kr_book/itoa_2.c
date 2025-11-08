@@ -1,0 +1,55 @@
+/* Exercise 3-4
+ * itoa: convert n to characters in s using a do-while loop
+ * avoid overflow by taking the absolute value of each digit
+ * and appending a '-' sign if n is negative
+ */
+
+#include <stdio.h>
+#include <string.h>
+
+#define BUFFER 1000
+
+void itoa(int n, char s[]);
+void reverse(char s[]);
+
+int main(void)
+{
+    int n = -123;
+    char s[BUFFER];
+
+    itoa(n, s);
+    printf("Str: %s\n", s); // prints n converted to string s
+
+    return 0;
+}
+
+void itoa(int n, char s[])
+{
+    int i, j, sign;
+
+    sign = n;
+    i = 0;
+    do // generate digits in reverse order
+    {
+        j = (n % 10 < 0) ? -(n % 10) : (n % 10); // make remainder positive if n is negative
+        s[i++] = j + '0'; // get next digit
+    } while ((n /= 10) != 0); // remove last digit
+    if (sign < 0) // if n is negative add the '-' sign to the result
+    {
+        s[i++] = '-';
+    }
+    s[i] = '\0';
+    reverse(s);
+}
+
+void reverse(char s[])
+{
+    int c, i, j;
+
+    for (i = 0, j = strlen(s) - 1; i < j; i++, j--)
+    {
+        c = s[i];
+        s[i] = s[j];
+        s[j] = c;
+    }
+}
