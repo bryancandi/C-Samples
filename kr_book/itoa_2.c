@@ -19,6 +19,7 @@ int main(void)
     char s[BUFFER];
 
     itoa(n, s);
+    printf("Int: %d\n", n);
     printf("Str: %s\n", s); // prints n converted to string s
 
     return 0;
