@@ -5,6 +5,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define BUFFER 1000
@@ -25,14 +26,13 @@ int main(void)
 
 void itoa(int n, char s[])
 {
-    int i, j, sign;
+    int i, sign;
 
     sign = n;
     i = 0;
     do // generate digits in reverse order
     {
-        j = (n % 10 < 0) ? -(n % 10) : (n % 10); // make remainder positive if n is negative
-        s[i++] = j + '0'; // get next digit
+        s[i++] = abs(n % 10) + '0'; // get next digit
     } while ((n /= 10) != 0); // remove last digit
     if (sign < 0) // if n is negative add the '-' sign to the result
     {
