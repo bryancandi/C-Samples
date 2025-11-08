@@ -1,4 +1,8 @@
-/* Exercise 3-3 - expand shorthand */
+/* Exercise 3-3
+ * expand shorthand - a-z expands to abc...xyz, 0-9 expands to 0123456789
+ * a-z0-9 expands to abc...xyz0...9
+ * leading and trailing '-' are taken literally and printed
+ */
 
 #include <stdio.h>
 
