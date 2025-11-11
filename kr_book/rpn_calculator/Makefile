@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra		# Enable warnings
 LDFLAGS =
-OBJ = main.o stack.o getch.o getop.o
+OBJ = main.o stack.o getop.o
 TARGET = rpn_calc
 
 all: $(TARGET)
@@ -13,7 +13,6 @@ $(TARGET): $(OBJ)
 # Compile rules
 main.o: calc.h
 stack.o: calc.h
-getch.o: calc.h
 getop.o: calc.h
 
 # Clean up build artifacts
