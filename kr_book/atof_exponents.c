@@ -74,7 +74,7 @@ double factor(int exp, int sign)
 {
     double factor = 1.0;
 
-    for (int j = 0; j < exp; j++)
+    for (int i = 0; i < exp; i++)
     {
         factor *= 10.0;
     }
