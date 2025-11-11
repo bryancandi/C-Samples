@@ -72,15 +72,15 @@ double my_atof(char s[])
 
 double factor(int exp, int sign)
 {
-    double factor = 1.0;
+    double power = 1.0;
 
     for (int i = 0; i < exp; i++)
     {
-        factor *= 10.0;
+        power *= 10.0;
     }
     if (sign < 0)
     {
-        factor = 1.0 / factor;
+        power = 1.0 / power;
     }
-    return factor;
+    return power;
 }
