@@ -7,6 +7,7 @@
 #define BUFFER 1000
 
 double my_atof(char s[]);
+double factor(int exp, int sign);
 
 int main(void)
 {
@@ -28,8 +29,7 @@ int main(void)
 double my_atof(char s[])
 {
     double val, power;
-    double factor = 1.0;
-    int i, j, sign;
+    int i, sign;
     int exp = 0;
     int exp_sign = 1;
 
@@ -67,13 +67,20 @@ double my_atof(char s[])
         exp = 10 * exp + (s[i] - '0');
         i++;
     }
+    return (sign * val / power) * factor(exp, exp_sign);
+}
+
+double factor(int exp, int sign)
+{
+    double factor = 1.0;
+
     for (int j = 0; j < exp; j++)
     {
         factor *= 10.0;
     }
-    if (exp_sign < 0)
+    if (sign < 0)
     {
         factor = 1.0 / factor;
     }
-    return (sign * val / power) * factor;
+    return factor;
 }
