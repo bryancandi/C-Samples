@@ -3,7 +3,6 @@
  */
 
 #include <ctype.h>
-#include <math.h>
 #include <stdio.h>
 #define BUFFER 1000
 
@@ -29,7 +28,8 @@ int main(void)
 double my_atof(char s[])
 {
     double val, power;
-    int i, sign;
+    double factor = 1.0;
+    int i, j, sign;
     int exp = 0;
     int exp_sign = 1;
 
@@ -67,5 +67,13 @@ double my_atof(char s[])
         exp = 10 * exp + (s[i] - '0');
         i++;
     }
-    return (sign * val / power) * pow(10, exp_sign * exp);
+    for (int j = 0; j < exp; j++)
+    {
+        factor *= 10.0;
+    }
+    if (exp_sign < 0)
+    {
+        factor = 1.0 / factor;
+    }
+    return (sign * val / power) * factor;
 }
