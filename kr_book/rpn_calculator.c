@@ -3,13 +3,16 @@
  */
 
 #include <ctype.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAXOP 100   // max size of operand or operator
 #define MAXVAL 100  // max depth of value stack
 #define BUFSIZE 100 // buffer size for getch/ungetch
 #define NUMBER '0'  // signal that a number was found
+#define NAME 'n'    // signal that a name was found
 
 int sp = 0;         // next free stack position
 double val[MAXVAL]; // value stack
@@ -22,6 +25,8 @@ void push(double);
 double pop(void);
 int getch(void);
 void ungetch(int);
+void mathfnc(char []);
+void clear(void);
 
 // Reverse Polish Calculator
 int main(void)
@@ -36,6 +41,9 @@ int main(void)
         {
         case NUMBER:
             push(atof(s));
+            break;
+        case NAME:
+            mathfnc(s);
             break;
         case '+':
             push(pop() + pop());
@@ -57,6 +65,20 @@ int main(void)
             {
                 printf("error: zero divisor\n");
             }
+            break;
+        case '%':
+            op2 = pop();
+            if (op2 != 0.0)
+            {
+                push(fmod(pop(), op2));
+            }
+            else
+            {
+                printf("error: zero divisor\n");
+            }
+            break;
+        case 'c':
+            clear();
             break;
         case '\n':
             printf("\t%.8g\n", pop());
@@ -104,6 +126,25 @@ int getop(char s[])
     while ((s[0] = c = getch()) == ' ' || c == '\t')
         ;
     s[1] = '\0';
+    i = 0;
+    if (islower(c)) // command or NAME
+    {
+        while (islower(s[++i] = c = getch()))
+            ;
+        s[i] = '\0';
+        if (c != EOF)
+        {
+            ungetch(c); // went one char too far
+        }
+        if (strlen(s) > 1)
+        {
+            return NAME; // > 1 char; it is NAME
+        }
+        else
+        {
+            return c; // it may be a command
+        }
+    }
     if (!isdigit(c) && c != '.')
     {
         return c; // not a number
@@ -144,4 +185,38 @@ void ungetch(int c)
     {
         buf[bufp++] = c;
     }
+}
+
+// mathfnc: check string s for supported math functions
+void mathfnc(char s[])
+{
+    double op2;
+
+    if (strcmp(s, "sin") == 0)
+    {
+        push(sin(pop()));
+    }
+    else if (strcmp(s, "cos") == 0)
+    {
+        push(cos(pop()));
+    }
+    else if (strcmp(s, "exp") == 0)
+    {
+        push(exp(pop()));
+    }
+    else if (strcmp(s, "pow") == 0)
+    {
+        op2 = pop();
+        push(pow(pop(), op2));
+    }
+    else
+    {
+        printf("error: %s not supported\n", s);
+    }
+}
+
+// clear: clear the stack
+void clear(void)
+{
+    sp = 0;
 }
