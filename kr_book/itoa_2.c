@@ -10,7 +10,7 @@
 
 #define BUFFER 1000
 
-void itoa(int n, char s[]);
+void my_itoa(int n, char s[]);
 void reverse(char s[]);
 
 int main(void)
@@ -18,14 +18,14 @@ int main(void)
     int n = -123;
     char s[BUFFER];
 
-    itoa(n, s);
+    my_itoa(n, s);
     printf("Int: %d\n", n);
     printf("Str: %s\n", s); // prints n converted to string s
 
     return 0;
 }
 
-void itoa(int n, char s[])
+void my_itoa(int n, char s[])
 {
     int i, sign;
 
