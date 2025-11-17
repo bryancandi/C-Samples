@@ -4,7 +4,7 @@
 
 #define MAXLINE 1000
 
-int my_strlen(char s[]);
+int my_strlen(char *s);
 
 int main(void)
 {
