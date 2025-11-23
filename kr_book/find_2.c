@@ -1,5 +1,8 @@
 /* Sample 5.10
  * find: print lines that match pattern from 1st arg; 2nd version
+ * optional flags:
+ * -x   print lines that do not match the pattern
+ * -n   print line numbers before matching lines
  */
 
 #include <stdio.h>
