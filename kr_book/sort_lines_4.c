@@ -11,7 +11,7 @@
 
 #define MAXLINES 5000               // max # lines to be sorted 
 #define MAXLEN 1000                 // max length of any input line
-#define ALLOCSIZE 1000              // size of available space
+#define ALLOCSIZE 10000             // size of available space
 char *lineptr[MAXLINES];            // pointers to text lines
 static char allocbuf[ALLOCSIZE];    // storage for alloc
 static char *allocp = allocbuf;     // next free position
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
                     reverse = 1;
                     break;
                 default:
-                    printf("find: illegal option %c\n", c);
+                    printf("sort: illegal option %c\n", c);
                     numeric = 0;
                     reverse = 0;
                     break;
@@ -162,7 +162,7 @@ int numcmp(char *s1, char *s2)
     {
         return -1;
     }
-    else if ( v1 > v2)
+    else if (v1 > v2)
     {
         return 1;
     }
