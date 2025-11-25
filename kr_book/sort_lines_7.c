@@ -4,8 +4,9 @@
  * -n   numeric sort
  * -r   reverse sort order
  * -f   fold upper and lower case together (ignore case)
- * -d   directory order (compare only letters, numbers and blanks)
- * -k   sort by field; eg: 'sort -k2 -n' would sort from the 2nd field numerically
+ * -d   directory order (compare only letters, numbers, and blanks)
+ * -kN  sort by a specific field N; e.g., 'sort -k2 -n' sorts lines numerically by the 2nd field
+ * -h   display help message
  */
 
 #include <ctype.h>
@@ -62,13 +63,25 @@ int main(int argc, char *argv[])
                 case 'k':
                     field = atoi(argv[0] + 1);  // e.g. "-k2" sets field=2
                     goto end_of_option;         // break out of switch so default case isn't reached
+                case 'h':
+                     printf(
+                        "Usage: sort [-nrfdh] [-kN]\n"
+                        "-n   numeric sort\n"
+                        "-r   reverse sort order\n"
+                        "-f   fold upper and lower case together (ignore case)\n"
+                        "-d   directory order (compare only letters, numbers, and blanks)\n"
+                        "-kN  sort by a specific field N; e.g., 'sort -k2 -n' sorts lines numerically by the 2nd field\n"
+                        "-h   display this help message\n"
+                    );
+                    exit(0);
                 default:
                     printf("sort: illegal option %c\n", c);
+                    printf("Usage: sort [-nrfdh] [-kN]\n");
                     break;
             }
         }
-end_of_option:  // prevent "illegal option N" from default case when N is read in -kN
-    ;           // empty statement
+end_of_option: // stop scanning after -kN to avoid "illegal option N"
+    ;
     }
     if ((nlines = readlines(lineptr, MAXLINES)) >= 0)
     {
