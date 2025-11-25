@@ -52,7 +52,6 @@ int main(int argc, char *argv[])
                     break;
                 case 'f':
                     fold = 1;
-                    numeric = 0;
                     break;
                 case 'd':
                     directory = 1;
