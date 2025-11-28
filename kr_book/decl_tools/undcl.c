@@ -1,5 +1,6 @@
 /* Sample 5.12
- * undcl: convert word descriptions to declaration
+ * Exercise 5-19
+ * undcl: convert word descriptions into declarations
  * example: x is a function returning a pointer to an array of pointers to functions returning char
  * can be expressed as: x () * [] * () char
  * which returns: char (*(*x())[])()
@@ -13,18 +14,21 @@
 #define BUFSIZE 100         // buffer size for getch/ungetch
 
 enum { NAME, PARENS, BRACKETS };
+enum { NO, YES };
 
 int gettoken(void);
+int nexttoken(void);
 int tokentype;              // type of last token
 char token[MAXTOKEN];       // last token string
 char out[1000];             // output string
+int prevtoken = NO;         // there is no previous token
 
 int getch(void);
 void ungetch(int c);
 char buf[BUFSIZE];          // buffer for ungetch
 int bufp = 0;               // next free position in buf
 
-// convert word descriptions to declaration
+// convert word descriptions into declarations
 int main(void)
 {
     int type;
@@ -41,7 +45,15 @@ int main(void)
             }
             else if (type == '*')
             {
-                sprintf(temp, "(*%s)", out);
+                int next = nexttoken();
+                if (next == PARENS || next == BRACKETS)
+                {
+                    sprintf(temp, "(*%s)", out);
+                }
+                else
+                {
+                    sprintf(temp, "*%s", out);
+                }
                 strcpy(out, temp);
             }
             else if (type == NAME)
@@ -65,6 +77,11 @@ int gettoken(void)
     int c;
     char *p = token;
 
+    if (prevtoken == YES)
+    {
+        prevtoken = NO;
+        return tokentype;
+    }
     while ((c = getch()) == ' ' || c == '\t')
         ;
     if (c == '\n')
@@ -86,8 +103,19 @@ int gettoken(void)
     }
     else if (c == '[')
     {
-        for (*p++ = c; (*p++ = getch()) != ']'; )
-            ;
+        *p++ = '[';
+        while ((c = getch()) != ']' && c != EOF && c != '\n')
+        {
+            *p++ = c;
+        }
+        if (c != ']')
+        {
+            printf("error: missing ]\n");
+        }
+        else
+        {
+            *p++ = ']';
+        }
         *p = '\0';
         return tokentype = BRACKETS;
     }
@@ -105,6 +133,16 @@ int gettoken(void)
     {
         return tokentype = c;
     }
+}
+
+// nexttoken: get the next token and push it back
+int nexttoken(void)
+{
+    int type;
+
+    type = gettoken();
+    prevtoken = YES;
+    return type;
 }
 
 // getch: get a (possibly pushed back) character
