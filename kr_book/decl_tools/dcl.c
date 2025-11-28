@@ -1,4 +1,5 @@
 /* Sample 5.12
+ * Exercise 5-18
  * dcl: parse a C declaration and convert to words
  */
 
@@ -10,9 +11,11 @@
 #define BUFSIZE 100         // buffer size for getch/ungetch
 
 enum { NAME, PARENS, BRACKETS };
+enum { NO, YES };
 
 void dcl(void);
 void dirdcl(void);
+void printerr(char *msg);
 
 int gettoken(void);
 int tokentype;              // type of last token
@@ -20,6 +23,7 @@ char token[MAXTOKEN];       // last token string
 char name[MAXTOKEN];        // identifier name
 char datatype[MAXTOKEN];    // data type = char, int, etc.
 char out[1000];             // output string
+int prevtoken = NO;         // there is no previous token
 
 int getch(void);
 void ungetch(int c);
@@ -40,9 +44,16 @@ int main(void)
         }
         if (tokentype != '\n')
         {
-            printf("syntax error");
+            printf("syntax error\n");
         }
-        printf("%s: %s %s\n", name, out, datatype);
+        if (name[0] == '\0')
+        {
+            printf("invalid declaration\n");
+        }
+        else
+        {
+            printf("%s: %s %s\n", name, out, datatype);
+        }
     }
     return 0;
 }
@@ -73,7 +84,7 @@ void dirdcl(void)
         dcl();
         if (tokentype != ')')
         {
-            printf("error: missing )\n");
+            printerr("missing )\n");
         }
     }
     else if (tokentype == NAME) // variable name
@@ -82,7 +93,7 @@ void dirdcl(void)
     }
     else
     {
-        printf("error: expected name or (dcl)\n");
+        printerr("expected name or (dcl)\n");
     }
     while ((type = gettoken()) == PARENS || type == BRACKETS)
     {
@@ -99,12 +110,25 @@ void dirdcl(void)
     }
 }
 
+// printerr: handle errors
+void printerr(char *msg)
+{
+    printf("error: %s", msg);
+    name[0] = '\0';
+    prevtoken = YES;
+}
+
 // gettoken: return next token
 int gettoken(void)
 {
     int c;
     char *p = token;
 
+    if (prevtoken == YES)
+    {
+        prevtoken = NO;
+        return tokentype;
+    }
     while ((c = getch()) == ' ' || c == '\t')
         ;
     if (c == '\n')
@@ -126,8 +150,19 @@ int gettoken(void)
     }
     else if (c == '[')
     {
-        for (*p++ = c; (*p++ = getch()) != ']'; )
-            ;
+        *p++ = '[';
+        while ((c = getch()) != ']' && c != EOF && c != '\n')
+        {
+            *p++ = c;
+        }
+        if (c != ']')
+        {
+            printerr("missing ]\n");
+        }
+        else
+        {
+            *p++ = ']';
+        }
         *p = '\0';
         return tokentype = BRACKETS;
     }
