@@ -1,6 +1,7 @@
 /* Sample 6.5
  * Self-referential Structures
  * Word frequency count
+ * To-do: Implement exercises 6-3 and 6-4
  */
 
 #include <ctype.h>
