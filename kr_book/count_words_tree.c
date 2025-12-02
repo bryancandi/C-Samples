@@ -22,7 +22,7 @@ struct tnode *addtree(struct tnode *, char *);
 void treeprint(struct tnode *);
 struct tnode *talloc(void);
 char *my_strdup(char *);
-void freetree(struct tnode *p);
+void freetree(struct tnode *);
 int getword(char*, int);
 
 char buf[BUFSIZE];  // buffer for ungetch
