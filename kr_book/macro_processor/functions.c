@@ -68,3 +68,37 @@ struct nlist *install(char *name, char *defn)
     }
     return np;
 }
+
+// Exercise 6-5
+// undef: remove node from hashtab
+void undef(char *name)
+{
+    struct nlist *np;
+    struct nlist *nprev = NULL;
+    unsigned hashval = hash(name); // hash index of node to remove
+
+    // loop through each node in the linked list in hashtab at the hashval index
+    // nprev tracks the previous node; advance it as np moves forward
+    for (np = hashtab[hashval]; np != NULL; nprev = np, np = np->next)
+    {
+        // found matching name: unlink node
+        if (strcmp(name, np->name) == 0) // match
+        {
+            if (nprev == NULL) // node to remove is the first node in the list (list head)
+            {
+                // removed head: advance list head to next node
+                hashtab[hashval] = np->next; // remove first node
+            }
+            else
+            {
+                // remove current node np by skipping over it
+                nprev->next = np->next; // unlink
+            }
+            // free storage for the removed/unlinked node
+            free(np->name);
+            free(np->defn);
+            free(np);
+            return;
+        }
+    }
+}
