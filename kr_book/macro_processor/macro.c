@@ -1,14 +1,10 @@
-/* Table lookup functions for a #define macro processor program */
+/* macro.c
+ * hash table lookup functions for the #define processor program */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-struct nlist {          // table entry
-    struct nlist *next; // next entry in chain
-    char *name;         // define name
-    char *defn;         // replacement text
-};
+#include "macro.h"
 
 #define HASHSIZE 101
 
@@ -69,8 +65,7 @@ struct nlist *install(char *name, char *defn)
     return np;
 }
 
-// Exercise 6-5
-// undef: remove node from hashtab
+// undef: remove node from hashtab (Exercise 6-5)
 void undef(char *name)
 {
     struct nlist *np;
@@ -99,6 +94,19 @@ void undef(char *name)
             free(np->defn);
             free(np);
             return;
+        }
+    }
+}
+
+// print_hashtab: print all entries in the hash table
+void print_hashtab(void)
+{
+    struct nlist *np;
+    for (int i = 0; i < HASHSIZE; i++)
+    {
+        for (np = hashtab[i]; np != NULL; np = np->next)
+        {
+            printf("%s => %s\n", np->name, np->defn);
         }
     }
 }
