@@ -1,4 +1,4 @@
-# macro processor
+# macro processor (K&R exercise 6-6)
 
 - `main.c` — main function; reads and processes input
 - `macro.c` — hash table operations: `hash`, `lookup`, `install`, `undef`
