@@ -45,6 +45,8 @@ int main(void)
                 }
                 // remove from hash table
                 undef(name);
+                // print all current entries in hash table
+                print_hashtab();
             }
         }
         else // print replaced words
