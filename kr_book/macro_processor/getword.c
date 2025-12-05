@@ -24,18 +24,20 @@ int getword(char *word, int lim)
     {
         *w++ = c;
     }
-    if (!isalpha(c))
+    if (!isalpha(c) && c != '_') // recognize _ in identifier names)
     {
         *w = '\0';
         return c;
     }
     for ( ; --lim > 0; w++)
     {
-        if (!isalnum(*w = getch()))
+        c = getch();
+        if (!isalnum(c) && c != '_')
         {
-            ungetch(*w);
+            ungetch(c);
             break;
         }
+        *w = c;
     }
     *w = '\0';
     return word[0];
