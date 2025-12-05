@@ -1,3 +1,6 @@
 # macro processor
 
-- `functions.c` — functions that will be used for the `#define` processor program. This file does not contain a `main()` function and will not compile and run on its own.
+- `main.c` — main function; reads and processes input
+- `macro.c` — hash table operations: `hash`, `lookup`, `install`, `undef`
+- `macro.h` — header for the hash table and macro system
+- `getword.c` — input utilities: `getword`, `getch`, `ungetch`
