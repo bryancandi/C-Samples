@@ -6,8 +6,14 @@ This simple #define processor program stores macros in a hash table of linked li
 - `macro.c` — hash table operations: `hash`, `lookup`, `install`, `undef`
 - `macro.h` — header for the hash table and macro system
 - `getword.c` — input utilities: `getword`, `getch`, `ungetch`
+- `Makefile` — use `make` to automate compilation
 
-Compile with:
+Compile the program with GCC or the Makefile:
 
 ```sh
+# Using GCC directly
 gcc -Wall -Wextra -Wpedantic main.c macro.c getword.c -o macro
+
+# Using the Makefile
+make        # build the program
+make clean  # remove the compiled binary
