@@ -24,7 +24,8 @@ int getword(char *word, int lim)
     {
         *w++ = c;
     }
-    if (!isalpha(c) && c != '_') // recognize _ in identifier names)
+    // allow letters, digits, or underscore as starting character
+    if (!isalnum(c) && c != '_')
     {
         *w = '\0';
         return c;
