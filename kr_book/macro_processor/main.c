@@ -34,8 +34,6 @@ int main(void)
                 }
                 // install to hash table
                 install(name, defn);
-                // print all current entries in hash table
-                print_hashtab();
             }
             else if (strcmp(w, "undef") == 0) // word is "undef"
             {
@@ -45,7 +43,13 @@ int main(void)
                 }
                 // remove from hash table
                 undef(name);
-                // print all current entries in hash table
+            }
+        }
+        else if (strcmp(w, "!") == 0) // beginning of command
+        {
+            getword(w, MAXWORD);
+            if (strcmp(w, "print") == 0) // !print to print all currently defined macros
+            {
                 print_hashtab();
             }
         }
@@ -53,9 +57,9 @@ int main(void)
         {
             Nlist *np = lookup(w);
             if (np != NULL)
-                printf("%s ", np->defn);
+                printf("%s is defined as: %s\n", np->name, np->defn);
             else
-                printf("%s ", w);
+                printf("not defined: %s\n", w);
         }
     }
     return 0;
