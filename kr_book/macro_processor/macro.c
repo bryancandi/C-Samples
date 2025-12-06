@@ -8,7 +8,7 @@
 
 #define HASHSIZE 101
 
-static struct nlist *hashtab[HASHSIZE]; // pointer to table
+static Nlist *hashtab[HASHSIZE]; // pointer to hash table array
 
 // hash: form hash value for string (unsigned ensures non-negative value)
 unsigned hash(char *s)
@@ -23,9 +23,9 @@ unsigned hash(char *s)
 }
 
 // lookup: look for s in hashtab
-struct nlist *lookup(char *s)
+Nlist *lookup(char *s)
 {
-    struct nlist *np;
+    Nlist *np = NULL; // pointer intended to hold the head of the list; initialize to NULL
 
     for (np = hashtab[hash(s)]; np != NULL; np = np->next)
     {
@@ -38,14 +38,14 @@ struct nlist *lookup(char *s)
 }
 
 // install: put (name, defn) in hashtab
-struct nlist *install(char *name, char *defn)
+Nlist *install(char *name, char *defn)
 {
-    struct nlist *np;
+    Nlist *np = NULL;
     unsigned hashval;
 
     if ((np = lookup(name)) == NULL) // not found
     {
-        np = (struct nlist *) malloc(sizeof(*np));
+        np = malloc(sizeof(Nlist)); // allocate memory for each node
         if (np == NULL || (np->name = strdup(name)) == NULL)
         {
             return NULL;
@@ -68,8 +68,8 @@ struct nlist *install(char *name, char *defn)
 // undef: remove node from hashtab (Exercise 6-5)
 void undef(char *name)
 {
-    struct nlist *np;
-    struct nlist *nprev = NULL;
+    Nlist *np = NULL;
+    Nlist *nprev = NULL; // create a pointer to track the previous node position
     unsigned hashval = hash(name); // hash index of node to remove
 
     // loop through each node in the linked list in hashtab at the hashval index
@@ -101,7 +101,7 @@ void undef(char *name)
 // print_hashtab: print all entries in the hash table
 void print_hashtab(void)
 {
-    struct nlist *np;
+    Nlist *np = NULL;
     for (int i = 0; i < HASHSIZE; i++)
     {
         for (np = hashtab[i]; np != NULL; np = np->next)

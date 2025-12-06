@@ -51,7 +51,7 @@ int main(void)
         }
         else // print replaced words
         {
-            struct nlist *np = lookup(w);
+            Nlist *np = lookup(w);
             if (np != NULL)
                 printf("%s ", np->defn);
             else

@@ -4,17 +4,17 @@
 #ifndef MACRO_H
 #define MACRO_H
 
-// struct nlist: table entry
-struct nlist {
+// Nlist: hash table entry for a macro (linked list node)
+typedef struct nlist {
     struct nlist *next; // next entry in chain
-    char *name;         // define name
+    char *name;         // macro name
     char *defn;         // replacement text
-};
+} Nlist;
 
 // macro.c: hash table operations
 unsigned hash(char *s);
-struct nlist *lookup(char *s);
-struct nlist *install(char *name, char *defn);
+Nlist *lookup(char *s);
+Nlist *install(char *name, char *defn);
 void undef(char *name);
 void print_hashtab(void);
 
